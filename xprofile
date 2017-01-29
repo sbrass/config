@@ -1,0 +1,36 @@
+export I3_CONFIG_DIR="$HOME/config"
+export PATH="$PATH:$HOME/bin"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+
+# use xresources
+[[ -f ${userresources} ]] && xrdb -merge -I$HOME ${userresources}
+
+# background
+[[ -e ${I3_CONFIG_DIR/wallpaper.sh} ]] && source ${I3_CONFIG_DIR}/wallpaper.sh
+
+# hide mouse coursor when it isn't used
+unclutter -root -visible &
+
+# pulse audio session
+start-pulseaudio-x11
+
+# keyboard layout defaults to us
+setxkbmap us
+
+# keyboard layout customization
+xmodmap ${usermodmap}
+
+# dynamic colour temperature adjustment
+redshift -c ${I3_CONFIG_DIR}/redshift.conf
+
+# disks automounting
+udiskie &
+
+# gpg agent
+gpg-connect-agent updatestartuptty /bye
+
+# Network Manager applet
+>> /dev/null which nm-applet && nm-applet &
