@@ -1,0 +1,21 @@
+#+TITLE:
+#+AUTHOR: Simon Braß
+#+E-MAIL: simon_brass@gmx.de
+
+* Prerequisites
+
+- unclutter
+- feh
+
+* LightDM
+
+#+BEGIN_SRC sh
+[greeter]
+background=/usr/share/backgrounds/gnome/Godafoss_Iceland.jpg 
+theme-name=Adwaita
+#+END_SRC
+
+[[file:/etc/lightdm/lightdm-gtk-greeter.conf]]
+
+* Xprofile
+
