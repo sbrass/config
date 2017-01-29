@@ -7,6 +7,9 @@
 - unclutter
 - feh
 
+* Export
+
+PATH is set in .profile
 * LightDM
 
 #+BEGIN_SRC sh
