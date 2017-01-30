@@ -1,0 +1,35 @@
+[http]
+	sslVerify = false
+
+[user]
+	email = brass@physik.uni-siegen.de
+	name = Simon Brass
+
+[core]
+	editor = emacs
+	excludefile = ~/config/.gitignore
+
+[format]
+	pretty = oneline
+
+[color]
+	ui = true
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = red
+
+[push]
+	default = simple
