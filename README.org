@@ -6,7 +6,11 @@
 
 - unclutter
 - feh
+- redshift
 
+* Tmux
+** Tmux plugin manager
+   [[https://github.com/tmux-plugins/tpm]]
 * Export
 
 PATH is set in .profile
