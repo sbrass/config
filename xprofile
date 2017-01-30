@@ -1,8 +1,10 @@
-export I3_CONFIG_DIR="$HOME/config"
+#!/bin/sh
+
+export CONFIG_DIR="$HOME/config"
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
 # background
-# [[ -e ${I3_CONFIG_DIR/wallpaper.sh} ]] && source ${I3_CONFIG_DIR}/wallpaper.sh
+[[ -e ~/.fehbg ]] && source ~/.fehbg
 
 # hide mouse coursor when it isn't used
 unclutter -root -visible &
@@ -11,7 +13,7 @@ unclutter -root -visible &
 start-pulseaudio-x11
 
 # dynamic colour temperature adjustment
-redshift -c ${I3_CONFIG_DIR}/redshift.conf &
+redshift -c ${CONFIG_DIR}/redshift.conf &
 
 # disks automounting
 # udiskie &
