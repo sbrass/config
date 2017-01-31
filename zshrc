@@ -51,7 +51,7 @@ ZSH_THEME="crunch"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases colorize debian git sudo tmux tmuxinator)
+plugins=(archlinux common-aliases colorize debian git sudo tmux tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
