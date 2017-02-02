@@ -2,11 +2,15 @@
 #+AUTHOR: Simon Braß
 #+E-MAIL: simon_brass@gmx.de
 
+#+LANGUAGE: uk
+
 * Prerequisites
 
 - unclutter
 - feh
 - redshift
+- dmenu2 (from AUR)
+- suckless' st
 
 * Tmux
 ** Tmux plugin manager
