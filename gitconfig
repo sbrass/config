@@ -7,7 +7,7 @@
 
 [core]
 	editor = emacs
-	excludefile = ~/config/.gitignore
+	excludefile = ~/config/gitignore
 
 [format]
 	pretty = oneline
