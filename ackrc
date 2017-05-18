@@ -17,4 +17,5 @@
 --smart-case
 
 # Noweb support
---type-set=noweb=.nw
+--type-set=nw=.nw
+--type-set=sin=.sin
