@@ -1,4 +1,7 @@
+source ${HOME}/workspace/local/whizard-env-bin.sh
+
 export WHIZARD_GIT=${HOME}/whizard-git
+export WHIZARD_OPENLOOPS="--enable-openloops --with-openloops=${HOME}/workspace/local/OpenLoops"
 
 alias cwg="cd ${WHIZARD_GIT}"
 
