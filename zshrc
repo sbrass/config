@@ -37,7 +37,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -64,9 +64,9 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='emacs -nw'
+  export EDITOR='emacsclient-nw'
 else
-  export EDITOR='emacs -nw'
+  export EDITOR='emacsclient -nw'
 fi
 
 # Compilation flags
@@ -85,8 +85,13 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias tmux="tmux -2"
 alias mux="tmuxinator"
+alias ec="emacsclient -nw"
 
 function cless ()
 {
     colorize $1 | less -RN
 }
+
+# OPAM configuration
+. /home/simon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+export PATH="/home/simon/.local/anaconda3/bin/:$PATH"
