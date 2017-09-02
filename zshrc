@@ -66,7 +66,7 @@ export LANG=en_US.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='emacsclient-nw'
 else
-  export EDITOR='emacsclient -nw'
+  export EDITOR='kak'
 fi
 
 # Compilation flags

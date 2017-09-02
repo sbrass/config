@@ -156,7 +156,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-    status_command  j4status -c ~/.i3/j4status.conf
+    status_command  py3status -c ~/.i3/i3status.conf
     position        bottom
     mode            dock
     #hidden_state    hide
@@ -174,8 +174,8 @@ exec --no-startup-id dropbox start
 
 exec --no-startup-id xset +dpms
 exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy"
-exec --no-startup-id dunst --config ~/i3-config/dunstrc
-exec conky -c ~/.conkyrc
+exec --no-startup-id dunst --config ~/config/dunstrc
+exec --no-startuo-id conky -c ~/config/conky.conf
 
 # Custom KeyBinds
 bindsym Control+mod1+l exec i3lock-fancy
@@ -186,7 +186,6 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 2+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2- unmute
 bindsym XF86AudioMute exec amixer -D pulse -q set Master toggle
 
-bindsym $mod+Shift+x exec ~/.i3/i3-exit.py
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 
 bindsym XF86MonBrightnessUp exec xbacklight +5
