@@ -19,7 +19,8 @@ values."
    ;; listed in `dotspacemacs-configuration-layers'. `nil' disable the lazy
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
-   ;; (default 'unused)
+   ;; (html
+   default 'unused)
    dotspacemacs-enable-lazy-installation 'unused
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
@@ -32,7 +33,6 @@ values."
    dotspacemacs-configuration-layers
    '(
      deft
-     rust
      python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -46,7 +46,8 @@ values."
      emacs-lisp
      ess
      (latex :variables
-            latex-build-command "LatexMk")
+            latex-build-command "LatexMk"
+            latex-enable-folding t)
      bibtex
      plantuml
      git
@@ -54,7 +55,6 @@ values."
      (org :variables
           org-projectile-file "~/Documents/Notes/TODOs.org")
      spacemacs-org
-     mu4e
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -63,8 +63,6 @@ values."
                      spell-checking-enable-auto-dictionary nil)
      syntax-checking
      version-control
-     php
-     html
      yaml
      ansible
      docker
@@ -87,7 +85,7 @@ values."
    ;; `used-but-keep-unused' installs only the used packages but won't uninstall
    ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-only)
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -122,7 +120,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'emacs
+   dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -333,17 +331,19 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  ;; Imenu produces menus for accessing locations in documents, typically in the current buffer.
-  ;; Helm makes the search and find experience much more better.
-  (global-set-key (kbd "C-c .") 'helm-imenu)
-
   (setq deft-directory "~/Documents/Notes")
 
+  (spaceline-compile)
   ;; Indenting guide
   (indent-guide-global-mode)
 
   (require 'ess-site)
   (add-to-list 'auto-mode-alist '("\\.nw\\'" . ess-noweb-mode))
+  (with-eval-after-load 'ess
+    (setq ess-noweb-doc-mode 'fundamental-mode
+          noweb-default-code-mode 'f90-mode
+          ess-noweb-default-code-mode 'f90-mode)
+    )
 
   (with-eval-after-load 'org
     (setq org-log-done 'time)
@@ -479,44 +479,6 @@ you should place your code here."
             ("P" "process-soon" entry (file+headline "~/Documents/TODO.org" "Todo")
              "* TODO %a %?\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))")))
     )
-
-  ;; mu4e
-  (setq message-send-mail-function 'smtpmail-send-it
-        starttls-use-gnutls t
-        smtpmail-starttls-credentials
-        '(("mail.uni-siegen.de" 587 nil nil))
-        smtpmail-auth-credentials
-        (expand-file-name "~/.authinfo.gpg")
-        smtpmail-default-smtp-server "mail.uni-siegen.de"
-        smtpmail-smtp-server "mail.uni-siegen.de"
-        smtpmail-smtp-service 587
-        smtpmail-debug-info t)
-
-  ;;; Set up some common mu4e variables
-  (setq mu4e-maildir "~/Mail"
-        mu4e-trash-folder "/Trash"
-        mu4e-refile-folder "/Archive"d
-        mu4e-get-mail-command "mbsync -a"
-        mu4e-update-interval nil
-        mu4e-compose-signature-auto-include nil
-        mu4e-view-show-images t
-        mu4e-view-show-addresses t
-        )
-  ;;; Mail directory shortcuts
-  (setq mu4e-maildir-shortcuts
-        '(("/Uni/INBOX" . ?S)))
-  ;;; Bookmarks
-  (setq mu4e-bookmarks
-        '(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
-          ("date:today..now" "Today's messages" ?t)
-          ("date:7d..now" "Last 7 days" ?w)
-          ("mime:image/*" "Messages with images" ?p)
-          (,(mapconcat 'identity
-                       (mapcar
-                        (lambda (maildir)
-                          (concat "maildir:" (car maildir)))
-                        mu4e-maildir-shortcuts) " OR ")
-           "All inboxes" ?i)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -541,3 +503,29 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   (quote
+    (pdf-tools white-sand-theme symon string-inflection rebecca-theme password-generator helm-purpose window-purpose imenu-list evil-lion editorconfig browse-at-remote deft winum unfill solarized-theme madhat2r-theme fuzzy company-ansible graphviz-dot-mode toml-mode racer flycheck-rust seq cargo rust-mode zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme utop tuareg caml ocp-indent merlin yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic nginx-mode plantuml-mode cdlatex web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data company auto-yasnippet auto-dictionary ac-ispell auto-complete ibuffer-projectile yasnippet mu4e-maildirs-extension mu4e-alert ht yaml-mode xterm-color smeargle shell-pop phpunit phpcbf php-extras php-auto-yasnippets orgit org-ref key-chord ivy org-projectile pcache org-present org org-pomodoro alert log4e gntp org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow jinja2-mode htmlize helm-gitignore helm-company helm-c-yasnippet helm-bibtex parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor ess-smart-equals ess-R-object-popup ess-R-data-view ctable ess julia-mode eshell-z eshell-prompt-extras esh-help drupal-mode php-mode dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat diff-hl company-statistics company-auctex biblio biblio-core auctex-latexmk auctex ansible-doc ansible ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
+ '(safe-local-variable-values
+   (quote
+    ((ess-noweb-doc-mode . LaTeX-mode)
+     (noweb-default-code-mode . f90-mode)
+     (ess-noweb-default-code-mode . f90-mode)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)

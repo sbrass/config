@@ -6,7 +6,7 @@
 	name = Simon Brass
 
 [core]
-	editor = emacs
+	editor = kak
 	excludefile = ~/config/gitignore
 
 [format]

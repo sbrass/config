@@ -1,4 +1,4 @@
-source ${HOME}/workspace/local/bin/whizard-build-env.sh
+# source ${HOME}/workspace/local/bin/whizard-build-env.sh
 
 export WHIZARD_GIT=${HOME}/whizard-git
 export WHIZARD_OPENLOOPS="--enable-openloops --with-openloops=${HOME}/workspace/local/OpenLoops"
