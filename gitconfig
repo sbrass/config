@@ -6,7 +6,7 @@
 	name = Simon Brass
 
 [core]
-	editor = kak
+	editor = atom --wait
 	excludefile = ~/config/gitignore
 
 [format]
