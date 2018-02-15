@@ -34,4 +34,13 @@ theme-name=Adwaita
 [[file:/etc/lightdm/lightdm-gtk-greeter.conf]]
 
 * Xprofile
+* i3
+
+** py3status 
+
+#+BEGIN_SRC shell
+    /usr/bin/pip install py3status
+    /usr/bin/pip install tzlocal
+    yaourt -S dropbox-cli # dropboxd_status
+#+END_SRC
 

@@ -11,8 +11,7 @@ set $tag2 "2: email"
 set $tag3 "3: terminal"
 set $tag4 "4: music"
 set $tag5 "5: emacs"
-set $tag6 "6: thunar"
-set $tag9 "9: timelog"
+set $tag6 "6: spacefm"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -102,25 +101,22 @@ bindsym $mod+Shift+5 move container to workspace $tag5
 bindsym $mod+Shift+6 move container to workspace $tag6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace $tag9
+bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # add apps to particular workspaces
-assign [class="vivaldi"] $tag1
+assign [class="firefox"] $tag1
 assign [class="Thunderbird"] $tag2
-# Sometimes you want emacs to open in the workspace you called it from
 assign [class="emacs"] $tag5
-#assign [class="Pidgin"] 6:chat
-assign [class="Gtimelog"] $tag9
+assign [class="spacefm"] $tag6
 
 # applications to start on startup
 exec firefox
 exec i3-msg 'workspace $tag2; exec thunderbird;'
-exec i3-msg 'workspace $tag3; exec terminator;'
-exec i3-msg 'workspace $tag4; exec exaile;'
+exec i3-msg 'workspace $tag3; exec alacritty;'
+exec i3-msg 'workspace $tag4; exec spotify;'
 exec i3-msg 'workspace $tag5; exec emacs;'
-exec i3-msg 'workspace $tag6; exec thunar;'
-exec i3-msg 'workspace $tag9; exec gtimelog;'
+exec i3-msg 'workspace $tag6; exec spacefm;'
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -159,12 +155,11 @@ bar {
     status_command  py3status -c ~/.i3/i3status.conf
     position        bottom
     mode            dock
-    #hidden_state    hide
     binding_mode_indicator yes
 # $i3-theme-bar
 }
 
-assign [class="^URvivaldi$"] -> $tag1
+assign [class="^URfirefox"] -> $tag1
 assign [class="^URthunderbird$"] -> $tag2
 assign [class="^URemacs$"] -> $tag5
 # Startup programs
@@ -175,7 +170,6 @@ exec --no-startup-id dropbox start
 exec --no-startup-id xset +dpms
 exec --no-startup-id xautolock -detectsleep -time 10 -locker "i3lock-fancy"
 exec --no-startup-id dunst --config ~/config/dunstrc
-exec --no-startuo-id conky -c ~/config/conky.conf
 
 # Custom KeyBinds
 bindsym Control+mod1+l exec i3lock-fancy
