@@ -165,7 +165,7 @@ assign [class="^URemacs$"] -> $tag5
 # Startup programs
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-fill ~/Bilder/Wallpaper/nasa-actual.jpg
-exec --no-startup-id dropbox start
+exec --no-startup-id unclutter -root -visible
 
 exec --no-startup-id xset +dpms
 exec --no-startup-id xautolock -detectsleep -time 10 -locker "i3lock-fancy"

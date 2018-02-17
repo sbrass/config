@@ -86,12 +86,13 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias tmux="tmux -2"
 alias mux="tmuxinator"
 alias ec="emacsclient -nw"
+alias grep='grep --color'
 
 function cless ()
 {
     colorize $1 | less -RN
 }
 
+export PATH="/home/simon/.local/texlive/2017/bin/x86_64-linux:/home/simon/.local/anaconda3/bin/:$PATH"
 # OPAM configuration
 . /home/simon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-export PATH="/home/simon/.local/anaconda3/bin/:$PATH"

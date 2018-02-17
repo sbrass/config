@@ -9,6 +9,37 @@ cp config/gtk-2.0 .gtk-2.0
 cp config/settings.ini .config/gtk-3.0
 #+END_SRC
 
+* Autostart
+
+  I recommend to autostart programs by using systemd's user services.
+  The systemd unit files are stored under =.config/systemd/user=.
+
+  When the units are enabled by =systemctl enable --user service-name=, they get started after user login.
+  
+** =redshift-gtk=
+
+   Redshift provides two unit files =/usr/lib/systemd/user/redshift.service= and =/usr/lib/systemd/user/redshift-gtk.service=.
+   I use the GTK version which launches with an icon in the tray.
+
+** =emacs.service=
+
+   I heavily use Emacs. Reducing the relativly long startup time of Emacs I use an emacsclient with an emacs daemon as systemd service.
+
+** =dropbox.service=
+
+   Dropbox should only be started as user. The service is provided by Dropbox itself.
+
+** Others
+
+   All other programs are started by =i3-wm= (see i3/config.base).
+
+   - =nm-applet=
+   - =feh= for the wallpaper
+   - =unclutter= for hiding the unused mouse (most important for watching videos)
+   - =xset= for activating DPMS
+   - =xautolock= loading =i3lock-fancy= as screen locker
+   - =dunst= as dbus messenger
+
 * Prerequisites
 
 - unclutter
@@ -28,7 +59,7 @@ PATH is set in .profile
 #+BEGIN_SRC sh
 [greeter]
 background=/usr/share/backgrounds/gnome/Godafoss_Iceland.jpg 
-theme-name=Adwaita
+theme-name=Arc
 #+END_SRC
 
 [[file:/etc/lightdm/lightdm-gtk-greeter.conf]]
